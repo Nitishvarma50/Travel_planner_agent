@@ -11,7 +11,12 @@ from tools.currency_convertion import CurrencyConversionTool
 
 class GraphBuilder():
     def __init__(self):
-        pass
+        self.tools = [WeatherInfoTool(), 
+                      PlaceSearchTool(), 
+                      CalculatorTool(), 
+                      CurrencyConversionTool()
+                      ]
+        self.system_prompt = SYSTEM_PROMPT
 
     def agent_function(self, state: MessageState):
         """
@@ -41,4 +46,4 @@ class GraphBuilder():
 
 
     def __call__(self, *args, **kwds):
-        pass
+        return self.build_graph()
