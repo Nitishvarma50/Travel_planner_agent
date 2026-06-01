@@ -36,7 +36,7 @@ if submit_button and user_input.strip():
         if response.status_code == 200:
             data = response.json()
             answer = data.get("answer", "Sorry, I couldn't get an answer.")
-            markdown_answer  = = f"""# 🌍 AI Travel Plan
+            markdown_answer  = f"""# 🌍 AI Travel Plan
 
             # **Generated:** {datetime.datetime.now().strftime('%Y-%m-%d at %H:%M')}  
             # **Created by:** Atriyo's Travel Agent

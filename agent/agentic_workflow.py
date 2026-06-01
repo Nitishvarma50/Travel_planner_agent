@@ -5,18 +5,27 @@ from langgraph.graph import StateGraph, MessageState, END, START
 from langgraph.prebuilt import ToolNode, tools_condition
 from tools.weather_info import WeatherInfoTool
 from tools.place_search import PlaceSearchTool
-from tools.calculator import CalculatorTool
+from tools.expense_calculator import CalculatorTool
 from tools.currency_convertion import CurrencyConversionTool
 
 
 class GraphBuilder():
-    def __init__(self):
-        self.tools = [WeatherInfoTool(), 
-                      PlaceSearchTool(), 
-                      CalculatorTool(), 
-                      CurrencyConversionTool()
-                      ]
+    def __init__(self,model_provider:str="groq"):
+        self.model_loader = ModelLoader(model_provider=model_provider)
+        self.llm =self.model_loader.load_llm()
+        self.tools = []
+        self.weather_tool = WeatherInfoTool()
+        self.place_search_tool = PlaceSearchTool()
+        self.calculator_tool = CalculatorTool()
+        self.currency_conversion_tool = CurrencyConversionTool()
+        self.tools.extend([self.weather_tool,
+                           self.place_search_tool,
+                           self.calculator_tool,
+                           self.currency_conversion_tool])
+        self.llm_with_tools = self.llm.bind_tools(self.tools)
+        self.graph = None
         self.system_prompt = SYSTEM_PROMPT
+
 
     def agent_function(self, state: MessageState):
         """
