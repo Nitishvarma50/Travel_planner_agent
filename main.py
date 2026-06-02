@@ -15,7 +15,7 @@ class QueryRequest(BaseModel):
 async def query_travel_planner(query: QueryRequest):
     try:
         print("Received query:", query)
-        graph = GraphBuilder(model_name="groq")
+        graph = GraphBuilder(model_provider="Groq")
         react_app = graph()
         
         png_graph = react_app.get_graph().draw_mermaid_png()
@@ -23,7 +23,7 @@ async def query_travel_planner(query: QueryRequest):
             f.write(png_graph)
 
         print("Graph generated and saved as graph.png")
-        messages ={"messages": {query.Question}}
+        messages = {"messages": [query.query]}
 
         output = react_app.invoke(messages)
 

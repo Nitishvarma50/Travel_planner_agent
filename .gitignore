@@ -12,3 +12,8 @@ venv
 
 # Local secrets
 .env
+
+# Logs
+logs/
+*.log
+

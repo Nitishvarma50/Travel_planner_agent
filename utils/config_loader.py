@@ -1,4 +1,4 @@
-import ymaml
+import yaml
 import os
 
 def load_config(config_path="config/config.yaml"):
@@ -9,6 +9,6 @@ def load_config(config_path="config/config.yaml"):
         raise FileNotFoundError(f"Configuration file not found at {config_path}")
     
     with open(config_path, "r") as f:
-        config = ymaml.safe_load(f)
+        config = yaml.safe_load(f)
     
     return config

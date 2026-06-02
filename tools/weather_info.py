@@ -8,9 +8,9 @@ from utils.weather_info import WeatherForecastTool
 class WeatherInfoTool:
     def __init__(self):
         load_dotenv()
-        api_key = os.getenv("OPENWEATHER_API_KEY")
+        api_key = os.getenv("OPENWEATHERMAP_API_KEY") or os.getenv("OPENWEATHER_API_KEY")
         if not api_key:
-            raise ValueError("OPENWEATHER_API_KEY not found in environment variables.")
+            raise ValueError("OPENWEATHERMAP_API_KEY not found in environment variables.")
         
         self.weather_service = WeatherForecastTool(api_key)
         self.weather_tool_list = self._setup_tools()

@@ -2,7 +2,7 @@ import requests
 
 class CurrencyConversionTool:
     def __init__(self,api_key: str):
-        self.base_url = "https://v6.exchangerate-api.com/v6/{api_key}/latest/"
+        self.base_url = f"https://v6.exchangerate-api.com/v6/{api_key}/latest/"
 
     def convert_currency(self, from_currency: str, to_currency: str, amount: float) -> float:
         """Convert an amount from one currency to another."""
